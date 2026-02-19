@@ -32,6 +32,18 @@ function createCard(item, type) {
     card.appendChild(img)
   }
 
+  // Add badge for quick recipes (<= 45 minutes)
+  if (type === 'recipe') {
+    const time = item.totalTime == null ? null : Number(item.totalTime)
+    if (time != null && !Number.isNaN(time) && time <= 45) {
+      const badge = document.createElement('span')
+      badge.className = 'badge'
+      badge.textContent = '≤ 45 min'
+      card.appendChild(badge)
+      card.classList.add('quick')
+    }
+  }
+
   const desc = document.createElement('p')
   desc.className = 'desc'
   if (type === 'book') desc.textContent = item.description || ''
