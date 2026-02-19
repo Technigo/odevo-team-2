@@ -272,6 +272,19 @@ const sortItems = (() => {
 const sortBtn = document.getElementById('sortButton')
 if (sortBtn) sortBtn.addEventListener('click', sortItems)
 
+// Filter items with totalTime over 60 minutes
+const filterItems = () => {
+  const filtered = ORIGINAL_RECIPES.filter(recipe => 
+    recipe.totalTime === null || recipe.totalTime <= 60
+  )
+  recipes.length = 0
+  filtered.forEach(r => recipes.push(r))
+  renderItems(recipes)
+}
+
+const filterBtn = document.getElementById('filterButton')
+if (filterBtn) filterBtn.addEventListener('click', filterItems)
+
 document.addEventListener('DOMContentLoaded', function() {
   renderItems(recipes)
   const resetBtn = document.getElementById('resetButton')
