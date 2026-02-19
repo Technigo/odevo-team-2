@@ -218,6 +218,9 @@ const recipes = [
   }
 ]
 
+// Snapshot to allow resetting
+const ORIGINAL_RECIPES = JSON.parse(JSON.stringify(recipes))
+
 function renderItems(items) {
   const library = document.getElementById('library')
   library.innerHTML = ''
@@ -271,4 +274,11 @@ if (sortBtn) sortBtn.addEventListener('click', sortItems)
 
 document.addEventListener('DOMContentLoaded', function() {
   renderItems(recipes)
+  const resetBtn = document.getElementById('resetButton')
+  if (resetBtn) resetBtn.addEventListener('click', () => {
+    // restore original recipe list
+    recipes.length = 0
+    ORIGINAL_RECIPES.forEach(r => recipes.push(r))
+    renderItems(recipes)
+  })
 })
