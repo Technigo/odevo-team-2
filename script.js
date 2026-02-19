@@ -251,6 +251,24 @@ function renderItems(items) {
   })
 }
 
+// Sort items by totalTime (ascending then toggle to descending)
+const sortItems = (() => {
+  let asc = true
+  return () => {
+    recipes.sort((a, b) => {
+      const aTime = a.totalTime == null ? Infinity : Number(a.totalTime)
+      const bTime = b.totalTime == null ? Infinity : Number(b.totalTime)
+      if (aTime === bTime) return (a.name || '').localeCompare(b.name || '')
+      return asc ? aTime - bTime : bTime - aTime
+    })
+    asc = !asc
+    renderItems(recipes)
+  }
+})()
+
+const sortBtn = document.getElementById('sortButton')
+if (sortBtn) sortBtn.addEventListener('click', sortItems)
+
 document.addEventListener('DOMContentLoaded', function() {
   renderItems(recipes)
 })
