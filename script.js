@@ -223,7 +223,10 @@ const ORIGINAL_RECIPES = JSON.parse(JSON.stringify(recipes))
 
 function renderItems(items) {
   const library = document.getElementById('library')
+  const summary = document.getElementById('summary')
   library.innerHTML = ''
+  
+  summary.textContent = `Showing ${items.length} of ${ORIGINAL_RECIPES.length} items`
   
   items.forEach(item => {
     const card = document.createElement('div')
@@ -255,6 +258,11 @@ function renderItems(items) {
     cuisineType.textContent = `Cuisine: ${item.cuisineType.join(', ')}`
     card.appendChild(cuisineType)
     
+    const ingredientCount = document.createElement('p')
+    ingredientCount.textContent = `Ingredients: ${item.ingredients.length}`
+    ingredientCount.className = 'ingredient-count'
+    card.appendChild(ingredientCount)
+    
     const image = document.createElement('img')
     image.src = item.image
     image.alt = item.name
@@ -265,6 +273,7 @@ function renderItems(items) {
 }
 
 // Sort items by totalTime (ascending then toggle to descending)
+const sortBtn = document.getElementById('sortButton')
 const sortItems = (() => {
   let asc = true
   return () => {
@@ -275,12 +284,17 @@ const sortItems = (() => {
       return asc ? aTime - bTime : bTime - aTime
     })
     asc = !asc
+    if (sortBtn) {
+      sortBtn.textContent = `Sort (${asc ? 'Descending' : 'Ascending'})`
+    }
     renderItems(recipes)
   }
 })()
 
-const sortBtn = document.getElementById('sortButton')
-if (sortBtn) sortBtn.addEventListener('click', sortItems)
+if (sortBtn) {
+  sortBtn.textContent = 'Sort (Ascending)'
+  sortBtn.addEventListener('click', sortItems)
+}
 
 // Filter items with totalTime over 60 minutes
 const filterItems = () => {
