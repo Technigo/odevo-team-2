@@ -277,3 +277,15 @@ const recipes = [
     image: './recipe-images/grilled.jpg'
   }
 ]
+
+const sortOnTotalTime = () => {
+  const library = document.getElementById('library')
+  const cards = Array.from(library.querySelectorAll('[data-type="recipe"]'))
+  cards.sort((a, b) => {
+    const aTime = recipes.find(r => r.name === a.querySelector('h3').textContent)?.totalTime || 0
+    const bTime = recipes.find(r => r.name === b.querySelector('h3').textContent)?.totalTime || 0
+    return aTime - bTime
+  })
+  cards.forEach(card => library.appendChild(card))
+}
+document.getElementById('sortButton').addEventListener('click', sortOnTotalTime)
