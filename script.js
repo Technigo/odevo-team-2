@@ -1,185 +1,80 @@
-const books = [
-  {
-    title: 'The Great Gatsby',
-    author: 'F. Scott Fitzgerald',
-    year: 1925,
-    genre: 'Fiction',
-    rating: 4.2,
-    description:
-      'A classic novel set in the Roaring Twenties, it explores themes of wealth, love, and the American Dream through the enigmatic Jay Gatsby.',
-    image: './books-images/the-great-gatsby.jpg'
-  },
-  {
-    title: 'To Kill a Mockingbird',
-    author: 'Harper Lee',
-    year: 1960,
-    genre: 'Fiction',
-    rating: 4.5,
-    description:
-      'Set in the American South, this novel tackles issues of racism and injustice through the eyes of young Scout Finch.',
-    image: './books-images/to-kill-a-mockingbird.jpg'
-  },
-  {
-    title: '1984',
-    author: 'George Orwell',
-    year: 1949,
-    genre: 'Science Fiction',
-    rating: 4.4,
-    description:
-      'A dystopian classic that explores totalitarianism and the consequences of a surveillance state in a bleak future.',
-    image: './books-images/1984.jpg'
-  },
-  {
-    title: 'Pride and Prejudice',
-    author: 'Jane Austen',
-    year: 1813,
-    genre: 'Fiction',
-    rating: 4.25,
-    description:
-      'A timeless romance novel that examines societal expectations and the misunderstandings that can arise from pride and prejudice.',
-    image: './books-images/pride-and-prejudice.jpg'
-  },
-  {
-    title: 'The Catcher in the Rye',
-    author: 'J.D. Salinger',
-    year: 1951,
-    genre: 'Fiction',
-    rating: 4,
-    description:
-      'Narrated by the teenage Holden Caulfield, the novel explores themes of alienation and the search for authenticity.',
-    image: './books-images/unknown.jpg'
-  },
-  {
-    title: 'The Hobbit',
-    author: 'J.R.R. Tolkien',
-    year: 1937,
-    genre: 'Fantasy',
-    rating: 4.6,
-    description:
-      'A fantasy adventure novel that follows Bilbo Baggins on a quest to help a group of dwarves reclaim their homeland from a dragon.',
-    image: './books-images/the-hobbit.jpg'
-  },
-  {
-    title: "Harry Potter and the Sorcerer's Stone",
-    author: 'J.K. Rowling',
-    year: 1997,
-    genre: 'Fantasy',
-    rating: 4.7,
-    description:
-      'The first book in the beloved Harry Potter series, it introduces readers to the magical world of Hogwarts and the young wizard Harry Potter.',
-    image: "./books-images/harry-potter-and-the-sorcerer.jpg"
-  },
-  {
-    title: 'Moby-Dick',
-    author: 'Herman Melville',
-    year: 1851,
-    genre: 'Adventure',
-    rating: 4.1,
-    description:
-      'An epic tale of obsession, revenge, and the relentless pursuit of the great white whale, Moby Dick.',
-    image: './books-images/moby-dick.jpg'
-  },
-  {
-    title: 'The Lord of the Rings: The Fellowship of the Ring',
-    author: 'J.R.R. Tolkien',
-    year: 1954,
-    genre: 'Fantasy',
-    rating: 4.55,
-    description:
-      'The first volume of the epic fantasy trilogy follows Frodo Baggins and the Fellowship on their quest to destroy the One Ring.',
-    image: './books-images/the-lord-of-the-rings.jpg'
-  },
-  {
-    title: 'The Shining',
-    author: 'Stephen King',
-    year: 1977,
-    genre: 'Horror',
-    rating: 4.3,
-    description:
-      "A psychological horror novel that tells the story of the Torrance family's terrifying experiences at the haunted Overlook Hotel.",
-    image: './books-images/unknown.jpg'
-  },
-  {
-    title: 'The Chronicles of Narnia: The Lion, the Witch and the Wardrobe',
-    author: 'C.S. Lewis',
-    year: 1950,
-    genre: 'Fantasy',
-    rating: 4.15,
-    description:
-      'The first book in the Chronicles of Narnia series, it follows the adventures of children who discover the magical land of Narnia.',
-    image: './books-images/the-chronicles-of-narnia.jpg'
-  },
-  {
-    title: 'The Da Vinci Code',
-    author: 'Dan Brown',
-    year: 2003,
-    genre: 'Mystery',
-    rating: 3.8,
-    description:
-      'A gripping mystery thriller that follows Harvard symbologist Robert Langdon as he unravels the secrets of the Da Vinci Code.',
-    image: './books-images/unknown.jpg'
-  },
-  {
-    title: 'The Alchemist',
-    author: 'Paulo Coelho',
-    year: 1988,
-    genre: 'Fiction',
-    rating: 4.25,
-    description:
-      'A philosophical novel that tells the story of Santiago, a shepherd boy, on his quest to discover his personal legend.',
-    image: './books-images/unknown.jpg'
-  },
-  {
-    title: 'The Hunger Games',
-    author: 'Suzanne Collins',
-    year: 2008,
-    genre: 'Science Fiction',
-    rating: 4.3,
-    description:
-      "In a dystopian future, Katniss Everdeen becomes a symbol of rebellion when she volunteers to take her sister's place in the brutal Hunger Games.",
-    image: './books-images/unknown.jpg'
-  },
-  {
-    title: 'The Girl with the Dragon Tattoo',
-    author: 'Stieg Larsson',
-    year: 2005,
-    genre: 'Mystery',
-    rating: 4.1,
-    description:
-      'A gripping mystery novel featuring investigative journalist Mikael Blomkvist and the enigmatic hacker Lisbeth Salander.',
-    image: './books-images/unknown.jpg'
-  },
-  {
-    title: 'The Road',
-    author: 'Cormac McCarthy',
-    year: 2006,
-    genre: 'Dystopian',
-    rating: 4,
-    description:
-      "Set in a post-apocalyptic world, it follows a father and son's harrowing journey to survive and find safety.",
-    image: './books-images/unknown.jpg'
-  },
-  {
-    title: "The Hitchhiker's Guide to the Galaxy",
-    author: 'Douglas Adams',
-    year: 1979,
-    genre: 'Science Fiction',
-    rating: 4.35,
-    description:
-      "A comedic science fiction series that follows the misadventures of Arthur Dent after Earth's destruction.",
-    image: './books-images/unknown.jpg'
-  },
-  {
-    title: 'The Giver',
-    author: 'Lois Lowry',
-    year: 1993,
-    genre: 'Dystopian',
-    rating: 4.12,
-    description:
-      'A dystopian novel set in a seemingly perfect society where young Jonas discovers the dark truth beneath the surface.',
-    image: './books-images/unknown.jpg'
+// books dataset removed
+const books = []
+
+// Create and render card elements for books and recipes
+function createCard(item, type) {
+  const card = document.createElement('div')
+  card.className = 'item'
+  card.dataset.type = type
+
+  const title = document.createElement('h3')
+  title.textContent = item.title || item.name || 'Untitled'
+  card.appendChild(title)
+
+  const meta = document.createElement('p')
+  meta.className = 'meta'
+  if (type === 'book') {
+    const parts = []
+    if (item.author) parts.push(item.author)
+    if (item.year) parts.push(item.year)
+    if (item.genre) parts.push(item.genre)
+    meta.textContent = parts.join(' • ')
+  } else {
+    meta.textContent = `${item.source || ''}${item.totalTime ? ' • ' + item.totalTime + ' min' : ''}`.trim()
   }
-]
+  card.appendChild(meta)
+
+  if (item.image) {
+    const img = document.createElement('img')
+    img.src = item.image
+    img.alt = item.title || item.name || ''
+    img.onerror = () => { img.style.display = 'none' }
+    card.appendChild(img)
+  }
+
+  // Add badge for quick recipes (<= 45 minutes)
+  if (type === 'recipe') {
+    const time = item.totalTime == null ? null : Number(item.totalTime)
+    if (time != null && !Number.isNaN(time) && time <= 45) {
+      const badge = document.createElement('span')
+      badge.className = 'badge'
+      badge.textContent = '≤ 45 min'
+      card.appendChild(badge)
+      card.classList.add('quick')
+    }
+  }
+
+  const desc = document.createElement('p')
+  desc.className = 'desc'
+  if (type === 'book') desc.textContent = item.description || ''
+  else desc.textContent = (item.ingredients && item.ingredients.slice(0, 4).join(', ')) || ''
+  card.appendChild(desc)
+
+  return card
+}
+
+function renderAllItems() {
+  const library = document.getElementById('library')
+  if (!library) return
+  library.innerHTML = ''
+
+  const all = []
+  if (Array.isArray(books)) books.forEach(b => all.push({ item: b, type: 'book' }))
+  if (Array.isArray(recipes)) recipes.forEach(r => all.push({ item: r, type: 'recipe' }))
+
+  all.forEach(({ item, type }) => {
+    const card = createCard(item, type)
+    library.appendChild(card)
+  })
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderAllItems()
+  const resetBtn = document.getElementById('resetButton')
+  if (resetBtn) resetBtn.addEventListener('click', resetItems)
+  const sortBtn = document.getElementById('sortButton')
+  if (sortBtn) sortBtn.addEventListener('click', sortItems)
+})
 
 const recipes = [
   {
@@ -400,3 +295,44 @@ const recipes = [
     image: './recipe-images/grilled.jpg'
   }
 ]
+
+// keep originals so reset can restore state
+const ORIGINAL_RECIPES = JSON.parse(JSON.stringify(recipes))
+const ORIGINAL_BOOKS = JSON.parse(JSON.stringify(books))
+
+function resetItems() {
+  // restore array contents without reassigning consts
+  recipes.length = 0
+  ORIGINAL_RECIPES.forEach(r => recipes.push(r))
+  books.length = 0
+  ORIGINAL_BOOKS.forEach(b => books.push(b))
+  renderAllItems()
+}
+
+const resetBtn = document.getElementById('resetButton')
+if (resetBtn) resetBtn.addEventListener('click', resetItems)
+
+const sortOnTotalTime = () => {
+  const library = document.getElementById('library')
+  const cards = Array.from(library.querySelectorAll('[data-type="recipe"]'))
+  cards.sort((a, b) => {
+    const aTime = recipes.find(r => r.name === a.querySelector('h3').textContent)?.totalTime || 0
+    const bTime = recipes.find(r => r.name === b.querySelector('h3').textContent)?.totalTime || 0
+    return aTime - bTime
+  })
+  cards.forEach(card => library.appendChild(card))
+}
+document.getElementById('sortButton').addEventListener('click', sortOnTotalTime)
+
+// Filter: remove recipes with totalTime over 60 minutes
+function filterShortRecipes() {
+  if (!Array.isArray(recipes)) return
+  const filtered = recipes.filter(r => r.totalTime == null || Number(r.totalTime) <= 60)
+  // replace contents of recipes array so reset can restore originals
+  recipes.length = 0
+  filtered.forEach(r => recipes.push(r))
+  renderAllItems()
+}
+
+const filterBtn = document.getElementById('filterButton')
+if (filterBtn) filterBtn.addEventListener('click', filterShortRecipes)
