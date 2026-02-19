@@ -240,6 +240,16 @@ function renderItems(items) {
     const time = document.createElement('p')
     time.textContent = `Time: ${item.totalTime ? item.totalTime + ' min' : 'N/A'}`
     card.appendChild(time)
+
+    // badge for quick recipes (<= 45 minutes)
+    const timeNum = item.totalTime == null ? null : Number(item.totalTime)
+    if (timeNum != null && !Number.isNaN(timeNum) && timeNum <= 45) {
+      const badge = document.createElement('span')
+      badge.className = 'badge'
+      badge.textContent = '≤ 45 min'
+      card.appendChild(badge)
+      card.classList.add('quick')
+    }
     
     const cuisineType = document.createElement('p')
     cuisineType.textContent = `Cuisine: ${item.cuisineType.join(', ')}`
