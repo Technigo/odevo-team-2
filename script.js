@@ -56,7 +56,13 @@ function renderAllItems() {
   })
 }
 
-document.addEventListener('DOMContentLoaded', () => renderAllItems())
+document.addEventListener('DOMContentLoaded', () => {
+  renderAllItems()
+  const resetBtn = document.getElementById('resetButton')
+  if (resetBtn) resetBtn.addEventListener('click', resetItems)
+  const sortBtn = document.getElementById('sortButton')
+  if (sortBtn) sortBtn.addEventListener('click', sortItems)
+})
 
 const recipes = [
   {
@@ -278,6 +284,22 @@ const recipes = [
   }
 ]
 
+// keep originals so reset can restore state
+const ORIGINAL_RECIPES = JSON.parse(JSON.stringify(recipes))
+const ORIGINAL_BOOKS = JSON.parse(JSON.stringify(books))
+
+function resetItems() {
+  // restore array contents without reassigning consts
+  recipes.length = 0
+  ORIGINAL_RECIPES.forEach(r => recipes.push(r))
+  books.length = 0
+  ORIGINAL_BOOKS.forEach(b => books.push(b))
+  renderAllItems()
+}
+
+const resetBtn = document.getElementById('resetButton')
+if (resetBtn) resetBtn.addEventListener('click', resetItems)
+
 const sortOnTotalTime = () => {
   const library = document.getElementById('library')
   const cards = Array.from(library.querySelectorAll('[data-type="recipe"]'))
@@ -289,3 +311,16 @@ const sortOnTotalTime = () => {
   cards.forEach(card => library.appendChild(card))
 }
 document.getElementById('sortButton').addEventListener('click', sortOnTotalTime)
+
+// Filter: remove recipes with totalTime over 60 minutes
+function filterShortRecipes() {
+  if (!Array.isArray(recipes)) return
+  const filtered = recipes.filter(r => r.totalTime == null || Number(r.totalTime) <= 60)
+  // replace contents of recipes array so reset can restore originals
+  recipes.length = 0
+  filtered.forEach(r => recipes.push(r))
+  renderAllItems()
+}
+
+const filterBtn = document.getElementById('filterButton')
+if (filterBtn) filterBtn.addEventListener('click', filterShortRecipes)
