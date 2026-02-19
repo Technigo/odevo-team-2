@@ -38,7 +38,8 @@ function createCard(item, type) {
     if (time != null && !Number.isNaN(time) && time <= 45) {
       const badge = document.createElement('span')
       badge.className = 'badge'
-      badge.textContent = '≤ 45 min'
+      badge.textContent = 'Top pick'
+      badge.title = 'Quick recipe (≤ 45 min)'
       card.appendChild(badge)
       card.classList.add('quick')
     }
@@ -324,15 +325,26 @@ const sortOnTotalTime = () => {
 }
 document.getElementById('sortButton').addEventListener('click', sortOnTotalTime)
 
-// Filter: remove recipes with totalTime over 60 minutes
+// Filter toggle: show only recipes with totalTime <= 60 when ON
+let filterOn = false
+const filterBtn = document.getElementById('filterButton')
 function filterShortRecipes() {
   if (!Array.isArray(recipes)) return
-  const filtered = recipes.filter(r => r.totalTime == null || Number(r.totalTime) <= 60)
-  // replace contents of recipes array so reset can restore originals
-  recipes.length = 0
-  filtered.forEach(r => recipes.push(r))
+  if (!filterOn) {
+    const filtered = ORIGINAL_RECIPES.filter(r => r.totalTime == null || Number(r.totalTime) <= 60)
+    recipes.length = 0
+    filtered.forEach(r => recipes.push(r))
+    if (filterBtn) filterBtn.textContent = 'Filter: On'
+  } else {
+    recipes.length = 0
+    ORIGINAL_RECIPES.forEach(r => recipes.push(r))
+    if (filterBtn) filterBtn.textContent = 'Filter: Off'
+  }
+  filterOn = !filterOn
   renderAllItems()
 }
 
-const filterBtn = document.getElementById('filterButton')
-if (filterBtn) filterBtn.addEventListener('click', filterShortRecipes)
+if (filterBtn) {
+  filterBtn.textContent = 'Filter: Off'
+  filterBtn.addEventListener('click', filterShortRecipes)
+}
